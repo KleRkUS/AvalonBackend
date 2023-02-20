@@ -29,7 +29,7 @@ export interface GameData {
 }
 
 export interface IAllLobbiesManager {
-    createGame(): Promise<string>;
+    createGame(): string;
     checkIfGameExists(id: string): boolean;
 }
 
@@ -38,7 +38,7 @@ export interface ILobbyManager {
     savePlayerName(id: string, name: string): void;
     sendMessageToPlayer(playerId: string, msg: IServerToClientMessage): void;
     getGameDataFromHost(playerId: string): void;
-    startGame(gameData: GameData): void;
+    // startGame(gameData: GameData): void;
 }
 
 export interface ILobbyManagerPlayer {

@@ -11,5 +11,7 @@ export interface IHostManager extends IAbstractPlayerManager {
     askForGameData(playerId: string): void;
 }
 
+// TODO: Add specific typization for Player class
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface IPlayerManager extends IAbstractPlayerManager {
 }

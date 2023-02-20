@@ -15,7 +15,7 @@
     "build": "npm run clean && npm run lint && npx ts-node -i -r tsconfig-paths/register tsconfig.build.json && npm run bundle:esm && npm run bundle:esm:min",
     "bundle:esm": "rollup build/index.js --file build/index.mjs --format esm",
     "bundle:esm:min": "terser --ecma 6 --compress --mangle --module -o build/index.min.mjs -- build/index.mjs && gzip -9 -c build/index.min.mjs > build/index.min.mjs.gz",
-    "prepare": "husky install",
+    "husky:prepare": "husky install && npx husky add .husky/pre-commit \"npm run lint && npm run prettify\"",
     "prettify": "npx prettier --write ./src"
   },
   "author": "",

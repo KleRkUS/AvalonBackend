@@ -5,20 +5,22 @@ import {
     ServerToHostMessageTypes
 } from "@app.d/enums/messageTypes";
 
-export type ConnectMessage = {
+export interface ConnectMessage {
     name: string;
 }
 
-export type ConnectResponse = {
+export interface ConnectResponse {
     success: boolean;
 }
 
 export interface HostGameDataToPlayer {
     playerId: string;
+    // TODO: Create gameData types as long as it will be clarified
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     gameData: any;
 }
 
-export type UnsupportedMessagePayload = {
+export interface UnsupportedMessagePayload {
     msg: "Unsupported"
 }
 
@@ -43,10 +45,14 @@ export enum TrueFalseStatuses {
 
 export interface IClientToServerMessage {
     type: PlayerMessageTypes | HostToServerMessageTypes;
+    // TODO: Create msg types as long as it will be clarified
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     msg?: any;
 }
 
 export interface IServerToClientMessage {
     type: PlayerResponseTypes | ServerToHostMessageTypes | PlayerMessageTypes;
+    // TODO: Create msg types as long as it will be clarified
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     msg?: any;
 }

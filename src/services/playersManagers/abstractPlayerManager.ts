@@ -34,7 +34,7 @@ abstract class AbstractPlayerManager implements IAbstractPlayerManager {
             cb(event.data);
         }
 
-        // @ts-ignore
+        // @ts-expect-error: Unexpected "No overload matches this call" error
         this._ws.addEventListener('message', listener);
     }
 
@@ -43,7 +43,9 @@ abstract class AbstractPlayerManager implements IAbstractPlayerManager {
     ) {
         switch (type) {
             case PlayerMessageTypes.Connect:
-                this._connect(msg?.name);
+                // TODO: Create msg types
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+                this._connect(msg?.name as string);
                 break;
             default:
                 this.sendMessage({
@@ -100,18 +102,20 @@ abstract class AbstractPlayerManager implements IAbstractPlayerManager {
     }
 
     sendMessage({ type, msg }: IServerToClientMessage) {
+        // TODO: Create msg types
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const obj = msg ? { type, msg } : { type };
         const str = JSON.stringify(obj);
         this._ws.send(str);
     }
 
     addInGameEventListeners(listener: (data: MessageEvent<InGamePlayerToServerMessage>) => void) {
-        // @ts-ignore
+        // @ts-expect-error: Unexpected "No overload matches this call" error
         this._ws.addEventListener('message', listener);
     }
 
     removeInGameEventListeners(listener: (data: MessageEvent<InGamePlayerToServerMessage>) => void) {
-        // @ts-ignore
+        // @ts-expect-error: Unexpected "No overload matches this call" error
         this._ws.removeEventListener('message', listener);
     }
 }

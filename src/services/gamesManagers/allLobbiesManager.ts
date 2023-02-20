@@ -9,8 +9,8 @@ class AllLobbiesManager implements IAllLobbiesManager {
         this._allGames = {};
     }
 
-    async createGame(): Promise<string> {
-        const id = await this._generateGameId();
+    createGame(): string {
+        const id = this._generateGameId();
         this._allGames[id] = new GameManager(id);
 
         return id;
@@ -20,14 +20,14 @@ class AllLobbiesManager implements IAllLobbiesManager {
         return Object.keys(this._allGames).some((key) => key === id);
     }
 
-    private async _generateGameId() {
-        let id: string = "";
+    private _generateGameId() {
+        let id = "";
         const getGameId = () => (
             getRandomGameId()
         );
 
         while (id === "" || new Set(Object.keys(this._allGames)).has(id)) {
-            id = await getGameId();
+            id = getGameId();
         }
 
         return id;

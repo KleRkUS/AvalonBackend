@@ -1,4 +1,4 @@
-import {GameData, ILobbyManagerPlayer, ILobbyManager} from "@app.d/games";
+import {ILobbyManagerPlayer, ILobbyManager} from "@app.d/games";
 import {IUserWS} from "@app.d/socket";
 import {getRandomPlayerId} from "@services/helpers";
 import WebSocket, {Server} from "ws";
@@ -37,11 +37,11 @@ class LobbyManager implements ILobbyManager {
         }
 
         this._setCloserTimeout();
-        this._connection?.on('connection', this._connectPlayer);
+        this._connection?.on('connection', this._connectPlayer.bind(this));
     }
 
     private _connectPlayer(ws: IUserWS) {
-        let playerId: string = "";
+        let playerId = "";
         while (playerId === "" || this._players.some((player: ILobbyManagerPlayer) => (
             player.id === playerId
         ))) {
@@ -103,9 +103,9 @@ class LobbyManager implements ILobbyManager {
         }
     }
 
-    startGame(gameData: GameData) {
-
-    }
+    // startGame(gameData: GameData) {
+    //
+    // }
 
     private _setCloserTimeout() {
         this._connectionKillerTimeout =

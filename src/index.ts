@@ -9,7 +9,7 @@ import config from 'config';
 import {gameRouter} from "@routes";
 
 const app: Express = express();
-const port: number = config.get('application.port') ?? 8999;
+const port: number = config.get('application.port') || 8999;
 
 app.use(compression())
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -19,7 +19,7 @@ app.use(gameRouter);
 
 export const server: http.Server = http.createServer(app);
 
-server.listen(port, async () => {
+server.listen(port, () => {
     console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
 });
 
